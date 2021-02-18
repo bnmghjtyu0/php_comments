@@ -1,3 +1,13 @@
+<?php 
+    require_once('./conn.php');
+    $sql = "select * from comments order by id desc";
+    $result = $conn->query($sql);
+    if(!$result) {
+        die('Error' . $conn->error);
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,36 +43,24 @@
 
             <div class="board__hr"></div>
 
-        <section class="mb-2">
-            <div class="card d-flex flex-row border-0">
+            <?php
+                while($row = $result->fetch_assoc()) {
+            ?>
+                <section class="mb-2">
+                    <div class="card d-flex flex-row border-0">
                         <div class="card__header">
                             <div class="card__avatar"></div>
                         </div>
                         <div class="card__body">
                             <div class="card__info">
-                                <span class="card__author">richard</span>
-                                <span class="card__time">2021-12-12</span>
+                                <span class="card__author"><?php echo $row['nickname'] ?></span>
+                                <span class="card__time"><?php echo $row['created_at'] ?></span>
                             </div>
-                            <div class="card__content">留言內容留言內容留言內容留言內容留言內容留言內容留言內容</div>
+                            <div class="card__content"><?php echo $row['content'] ?></div>
                         </div>
                     </div>
-        </section>
-
-        <section class="mb-2">
-            <div class="card d-flex flex-row border-0">
-                        <div class="card__header">
-                            <div class="card__avatar"></div>
-                        </div>
-                        <div class="card__body">
-                            <div class="card__info">
-                                <span class="card__author">richard</span>
-                                <span class="card__time">2021-12-12</span>
-                            </div>
-                            <div class="card__content">留言內容留言內容留言內容留言內容留言內容留言內容留言內容</div>
-                        </div>
-                    </div>
-        </section>
-
+                </section>
+            <?php } ?>
 
         </main>
     </div>
