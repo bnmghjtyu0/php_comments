@@ -5,6 +5,10 @@
     if(!$result) {
         die('Error' . $conn->error);
     }
+    $username = NULL;
+    if(!empty($_COOKIE['username'])) {
+        $username = $_COOKIE['username'];
+    }
 ?>
 
 
@@ -24,22 +28,40 @@
     </header>
 
     <div class="container-fluid">
+<?php
+    if(!$username) { ?>
+        <a href="register.php" class="btn">註冊</a>
+        <a href="login.php" class="btn">登入</a>
+    <?php } else { ?>
+        <a href="logout.php" class="btn">登出</a>
+    <?php } ?>
+      
         <main class="board">
             <h2 class="border__title">Comments</h2>
 
-            <form method="POST" action="./handle_add_comment.php">
-    `           <div class="d-flex g-0 mb-3">
+
+<?php if($username) { ?>
+
+<form method="POST" action="./handle_add_comment.php">
+
+            <!-- 改從註冊時輸入暱稱，登入後從資料庫取暱稱 -->
+               <!-- <div class="d-flex g-0 mb-3">
                     <label class="col-form-label me-3">暱稱: </label>
                     <div class="col-sm-6 d-flex align-items-center">
-                        <!-- <span>Richard</span> -->
+                        <span>Richard</span>
                         <input class="form-control" name="nickname"/>
                     </div>
-                </div>
+                </div> -->
                 <div class="d-flex flex-nowrap align-items-start">
                     <textarea name="content" row="12" class="form-control" style="height: 100px"></textarea>
                     <button type="submit" class="btn btn-outline-primary ms-3" style="white-space:pre;">送出</button>
                 </div>
             </form>
+            <?php } else { ?>
+
+                請登入發布留言
+     <?php } ?>
+
 
             <div class="board__hr"></div>
 
