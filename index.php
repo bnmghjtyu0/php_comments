@@ -32,7 +32,7 @@
                     <label class="col-form-label me-3">暱稱: </label>
                     <div class="col-sm-6 d-flex align-items-center">
                         <!-- <span>Richard</span> -->
-                        <input class="form-control"/>
+                        <input class="form-control" name="nickname"/>
                     </div>
                 </div>
                 <div class="d-flex flex-nowrap align-items-start">

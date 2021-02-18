@@ -49,6 +49,7 @@ textarea {
 .card__content {
     margin-top:8px;
     max-width:100%;
+    white-space: pre-line;
 }
 .card__author {
     color:#5c9edc;
