@@ -1,18 +1,19 @@
 <?php
+    session_start();
     require_once('./conn.php');
     require_once('./utils.php');
 
-    $user = getUserFromToken($_COOKIE['token']);
-    $nickname = $user['nickname'];
-    $username = $_COOKIE['username'];
+    // $user = getUserFromToken($_COOKIE['token']);
+    // $nickname = $user['nickname'];
+    $username = $_SESSION['username'];
     
-    $user_sql = sprintf("select nickname from users where username='$username'");
-    $user_result = $conn->query($user_sql);
-    $row = $user_result->fetch_assoc();
+    // $user_sql = sprintf("select nickname from users where username='$username'");
+    // $user_result = $conn->query($user_sql);
+    // $row = $user_result->fetch_assoc();
 
     $content = $_POST['content'];
     
-    if(empty($nickname) || empty($content)) {
+    if(empty($username) || empty($content)) {
         die('請檢查資料');
     }
 

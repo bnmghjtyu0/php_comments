@@ -83,7 +83,7 @@
                                 <span class="card__author"><?php echo $row['nickname'] ?></span>
                                 <span class="card__time"><?php echo $row['created_at'] ?></span>
                             </div>
-                            <div class="card__content"><?php echo $row['content'] ?></div>
+                            <div class="card__content"><?php echo escape($row['content']) ?></div>
                         </div>
                     </div>
                 </section>

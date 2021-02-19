@@ -24,4 +24,9 @@
         return $row; //username, id, nickname
     }
 
+    // 處理 XSS 的問題
+    function escape($str) {
+        return htmlspecialchars($str, ENT_QUOTES);
+    }
+
 ?>
