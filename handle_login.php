@@ -14,7 +14,7 @@
 
 
     // 寫入資料庫
-    $sql = sprintf("select * from users where username='%s' and password = '%s'",$username,$password);
+    $sql = sprintf("select * from users where username='%s'",$username);
     
     $result = $conn->query($sql);
 
@@ -22,7 +22,14 @@
         die($conn->error);
     }
 
-    if($result->num_rows) {
+    if($result->num_rows ===0) {
+        echo "查無帳號密碼";
+        exit();
+    }
+
+    $row = $result->fetch_assoc();
+
+    if(password_verify($password, $row['password'])) {
         //登入成功
         // 建立 token 並儲存
         // $token =  genToken();
