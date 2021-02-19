@@ -1,14 +1,19 @@
 <?php 
     require_once('./conn.php');
+    require_once('./utils.php');
+
+    $username = NULL;
+    if(!empty($_COOKIE['token'])) {
+        $user = getUserFromToken($_COOKIE['token']);
+        $username = $user['username'];
+    }
+
     $sql = "select * from comments order by id desc";
     $result = $conn->query($sql);
     if(!$result) {
         die('Error' . $conn->error);
     }
-    $username = NULL;
-    if(!empty($_COOKIE['username'])) {
-        $username = $_COOKIE['username'];
-    }
+    
 ?>
 
 

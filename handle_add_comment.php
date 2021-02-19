@@ -1,13 +1,15 @@
 <?php
     require_once('./conn.php');
+    require_once('./utils.php');
 
+    $user = getUserFromToken($_COOKIE['token']);
+    $nickname = $user['nickname'];
     $username = $_COOKIE['username'];
     
     $user_sql = sprintf("select nickname from users where username='$username'");
     $user_result = $conn->query($user_sql);
     $row = $user_result->fetch_assoc();
 
-    $nickname =$row['nickname'];
     $content = $_POST['content'];
     
     if(empty($nickname) || empty($content)) {
