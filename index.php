@@ -1,11 +1,11 @@
 <?php 
+    session_start();
     require_once('./conn.php');
     require_once('./utils.php');
 
     $username = NULL;
-    if(!empty($_COOKIE['token'])) {
-        $user = getUserFromToken($_COOKIE['token']);
-        $username = $user['username'];
+    if(!empty($_SESSION['username'])) {
+        $username = $_SESSION['username'];
     }
 
     $sql = "select * from comments order by id desc";

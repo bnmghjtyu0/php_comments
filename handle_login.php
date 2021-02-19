@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once('./conn.php');
     require_once('./utils.php');
 
@@ -24,15 +25,22 @@
     if($result->num_rows) {
         //登入成功
         // 建立 token 並儲存
-        $token =  genToken();
-        $sql = sprintf("insert into tokens(token,username) values('%s','%s')",$token,$username);
-        $result = $conn->query($sql);
-        if(!$result) {
-            die($conn->error);
-        }
+        // $token =  genToken();
+        // $sql = sprintf("insert into tokens(token,username) values('%s','%s')",$token,$username);
+        // $result = $conn->query($sql);
+        // if(!$result) {
+        //     die($conn->error);
+        // }
 
-        $expire  = time() + 3600 * 24*30;
-        setcookie("token",$token,$expire);
+        // $expire  = time() + 3600 * 24*30;
+        // setcookie("token",$token,$expire);
+
+    /*
+      1. 產生 session id (token)
+      2. 把 username 寫入檔案
+      3. set-cookie = session id
+    */
+        $_SESSION['username'] = $username;
         header("Location: ./index.php");
     }else {
         header("Location: ./index.php?errCode=2");
